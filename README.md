@@ -40,7 +40,7 @@ A deliberately un-generic look: deep ink surfaces, a warm brass accent, a serif/
 ### 1. Clone and install
 
 ```bash
-git clone <your-fork-url> vuevoice
+git clone [https://github.com/coldchicken-cloud/vuevoice-invoice-app.git](https://github.com/coldchicken-cloud/vuevoice-invoice-app.git)
 cd vuevoice
 npm install
 ```
@@ -57,7 +57,9 @@ This app needs its own Firebase project — it won't run against anyone else's.
 ### 3. (Optional) Set up EmailJS for the "Email Invoice" button
 
 1. Create a free account at [emailjs.com](https://www.emailjs.com/).
-2. Add an email service (e.g. Gmail) and a template that expects these variables: `to_email`, `to_name`, `invoice_id`, `invoice_date`, `payment_due_date`, `amount_due`, `item_summary`.
+
+2. Add an email service (e.g. Gmail) and a template that expects these variables: client_email, client_name, invoice_total, and message. (Optional fields you can include: invoice_id, invoice_date, payment_due_date, item_summary).
+
 3. Grab your Service ID, Template ID, and Public Key from the dashboard.
 
 Skip this step if you don't need email delivery — every other feature works fine without it, and the button will just show a friendly "not configured" message.
@@ -71,16 +73,16 @@ cp .env.example .env.local
 Fill in `.env.local` with your Firebase config (required) and EmailJS credentials (optional):
 
 ```
-VUE_APP_FIREBASE_API_KEY=AIzaSyDE0dUpDIQkgrGQYIRKpZw_IFtnk11BsSQ
-VUE_APP_FIREBASE_AUTH_DOMAIN=vuevoice-798f9.firebaseapp.com
-VUE_APP_FIREBASE_PROJECT_ID=vuevoice-798f9
-VUE_APP_FIREBASE_STORAGE_BUCKET=vuevoice-798f9.firebasestorage.app
-VUE_APP_FIREBASE_MESSAGING_SENDER_ID=331747810253
-VUE_APP_FIREBASE_APP_ID=1:331747810253:web:c4a8015087383c85604284
+VUE_APP_FIREBASE_API_KEY=your_api_key_here
+VUE_APP_FIREBASE_AUTH_DOMAIN=your_project_id.firebaseapp.com
+VUE_APP_FIREBASE_PROJECT_ID=your_project_id
+VUE_APP_FIREBASE_STORAGE_BUCKET=your_project_id.firebasestorage.app
+VUE_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VUE_APP_FIREBASE_APP_ID=your_app_id
 
-VUE_APP_EMAILJS_SERVICE_ID=service_e7qdxvj
-VUE_APP_EMAILJS_TEMPLATE_ID=template_jm54j4b
-VUE_APP_EMAILJS_PUBLIC_KEY=MeVgK0pNEfae4zFbI
+VUE_APP_EMAILJS_SERVICE_ID=your_service_id
+VUE_APP_EMAILJS_TEMPLATE_ID=your_template_id
+VUE_APP_EMAILJS_PUBLIC_KEY=your_public_key
 ```
 
 ### 5. Lock down Firestore
