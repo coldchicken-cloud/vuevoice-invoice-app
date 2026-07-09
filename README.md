@@ -1,4 +1,4 @@
-**Live Demo: [Click here to view the live app](vuevoice-invoice-app.vercel.app)**
+** Live Demo: [Click here to view the live app](https://vuevoice-invoice-app.vercel.app)**
 
 # Vuevoice
 
