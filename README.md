@@ -1,3 +1,5 @@
+**Live Demo: [Click here to view the live app](vuevoice-invoice-app.vercel.app)**
+
 # Vuevoice
 
 A lightweight, self-hosted invoicing workspace for freelancers and small studios. Create invoices, track what's paid vs. outstanding, export a clean PDF, email clients directly, and see revenue trends at a glance — all backed by your own Firebase project.
