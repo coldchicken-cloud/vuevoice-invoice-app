@@ -1,0 +1,288 @@
+// -----------------------------------------------------------------------
+// Design tokens
+//
+// Every color in the app is expressed as a CSS custom property so a single
+// class toggle (.theme-light on the root wrapper) can re-skin the whole
+// interface. The palette is deliberately "ledger" rather than generic
+// SaaS-purple: deep ink surfaces, warm brass accent, muted status colors.
+// -----------------------------------------------------------------------
+
+:root {
+  --color-page-bg: #12141c;
+  --color-surface: #1b1e29;
+  --color-surface-alt: #232735;
+  --color-surface-strong: #0b0d13;
+  --color-overlay: rgba(8, 9, 14, 0.6);
+
+  --color-text: #f3f1ea;
+  --color-text-secondary: #a9adc1;
+  --color-text-muted: #6f7387;
+  --color-draft: #a9adc1;
+
+  --color-input-bg: #1b1e29;
+  --color-input-border: #2d3140;
+
+  --color-accent: #c9a66b;
+  --color-accent-hover: #ddbb85;
+  --color-accent-soft: rgba(201, 166, 107, 0.14);
+  --color-danger: #d8685f;
+  --color-danger-hover: #e28880;
+  --color-success: #4faf8b;
+  --color-warning: #e3a857;
+
+  --shadow-panel: 0 12px 32px -12px rgba(0, 0, 0, 0.55), 0 2px 8px -2px rgba(0, 0, 0, 0.35);
+  --shadow-menu: 0 8px 24px -6px rgba(0, 0, 0, 0.5);
+  --shadow-focus: 0 0 0 3px var(--color-accent-soft);
+
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-light {
+  --color-page-bg: #f6f4ee;
+  --color-surface: #ffffff;
+  --color-surface-alt: #fbf9f3;
+  --color-surface-strong: #2a2d3a;
+  --color-overlay: rgba(30, 26, 20, 0.28);
+
+  --color-text: #201d18;
+  --color-text-secondary: #6b6f82;
+  --color-text-muted: #8b8fa3;
+  --color-draft: #6b6f82;
+
+  --color-input-bg: #ffffff;
+  --color-input-border: #e4e0d4;
+
+  --color-accent: #a9824b;
+  --color-accent-hover: #8f6c3c;
+  --color-accent-soft: rgba(169, 130, 75, 0.12);
+
+  --shadow-panel: 0 16px 32px -16px rgba(72, 60, 34, 0.22), 0 2px 8px -2px rgba(72, 60, 34, 0.1);
+  --shadow-menu: 0 10px 24px -8px rgba(72, 60, 34, 0.18);
+}
+
+// -----------------------------------------------------------------------
+// Motion - a small, disciplined vocabulary used everywhere instead of
+// one-off transitions scattered through components.
+// -----------------------------------------------------------------------
+
+@keyframes fade-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentle-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(216, 104, 95, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(216, 104, 95, 0);
+  }
+}
+
+@keyframes seal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7) rotate(-14deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.fade-rise-in {
+  animation: fade-rise-in 0.5s var(--ease-premium) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// -----------------------------------------------------------------------
+// Layout helpers shared by every view/component
+// -----------------------------------------------------------------------
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  padding: 40px 10px;
+  max-width: 850px;
+  margin: 0 auto;
+
+  @media (min-width: 900px) {
+    padding-top: 72px;
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+// -----------------------------------------------------------------------
+// Buttons - lift + soft shimmer on hover, a firm little press on click
+// -----------------------------------------------------------------------
+
+button,
+.button {
+  cursor: pointer;
+  padding: 15px 24px;
+  border-radius: 30px;
+  border: none;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  margin-right: 8px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s var(--ease-premium), box-shadow 0.2s var(--ease-premium), background-color 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+  }
+}
+
+.dark-purple {
+  background-color: var(--color-surface-alt);
+  color: var(--color-text);
+}
+
+.red {
+  background-color: var(--color-danger);
+  &:hover:not(:disabled) {
+    background-color: var(--color-danger-hover);
+  }
+}
+
+.purple {
+  background-color: var(--color-accent);
+  color: #1b1408;
+  box-shadow: 0 6px 16px -6px rgba(201, 166, 107, 0.55);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.5s ease;
+  }
+
+  &:hover:not(:disabled) {
+    background-color: var(--color-accent-hover);
+    box-shadow: 0 10px 22px -8px rgba(201, 166, 107, 0.6);
+
+    &::after {
+      left: 130%;
+    }
+  }
+}
+
+.green {
+  background-color: var(--color-success);
+}
+
+.orange {
+  background-color: var(--color-warning);
+  color: #1b1408;
+}
+
+// -----------------------------------------------------------------------
+// Status pill, used on the invoice list and the invoice detail header
+// -----------------------------------------------------------------------
+
+.status-button {
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 30px;
+  align-items: center;
+  padding: 8px 26px;
+  border-radius: 10px;
+  transition: transform 0.2s var(--ease-premium);
+}
+
+.paid {
+  &::before {
+    background-color: var(--color-success);
+  }
+  color: var(--color-success);
+  background-color: rgba(79, 175, 139, 0.12);
+}
+
+.pending {
+  &::before {
+    background-color: var(--color-warning);
+  }
+  color: var(--color-warning);
+  background-color: rgba(227, 168, 87, 0.12);
+}
+
+.draft {
+  &::before {
+    background-color: var(--color-draft);
+  }
+  color: var(--color-draft);
+  background-color: rgba(169, 173, 193, 0.12);
+}
+
+.overdue {
+  &::before {
+    background-color: var(--color-danger);
+  }
+  color: var(--color-danger);
+  background-color: rgba(216, 104, 95, 0.12);
+  animation: soft-pulse 2.4s ease-in-out infinite;
+}
