@@ -44,5 +44,11 @@ export async function emailInvoiceToClient(invoice) {
     item_summary: itemSummary,
   };
 
-  return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+ return emailjs.send(
+    'service_irw02ps', 
+    'template_391epfs', 
+    templateParams, 
+    'MeVgK0pNEfae4zFbl'
+  );
+}
 }
