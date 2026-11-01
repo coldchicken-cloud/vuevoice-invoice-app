@@ -44,5 +44,5 @@ export async function emailInvoiceToClient(invoice) {
     item_summary: itemSummary,
   };
 
-  return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, { publicKey: PUBLIC_KEY });
+  return emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
 }
